@@ -1,7 +1,7 @@
 class Neyron {
   Neyron[] child = null;
   double[] weight;
-  double learnRate = 0.1d;
+  double learnRate = 0.01d;
 
   Neyron(Neyron[] child_, double[] weight_) {
     child = child_;
@@ -12,7 +12,7 @@ class Neyron {
     child = child_;
     weight = new double[child.length];
     for (int i = 0; i < weight.length; i++)
-      weight[i] = random(-1, 1);
+      weight[i] = random(0, 1);
   }
 
   Neyron(double[] weight_) {
@@ -22,11 +22,7 @@ class Neyron {
   Neyron(int n_child) {
     weight = new double[n_child];
     for (int i = 0; i < weight.length; i++)
-      weight[i] = random(-1, 1);
-    //for (int i = 0; i < weight.length; i++) {
-    //  println(weight[i]);
-    //}
-    //println();
+      weight[i] = random(0, 1);
   }
 
   double probe(double[] x) {
@@ -89,7 +85,7 @@ class Test {
 }
 
 Neyron[] hiddenLayer1 = {new Neyron(4), new Neyron(4), new Neyron(4)};
-Neyron[] hiddenLayer2 = {new Neyron(hiddenLayer1), new Neyron(hiddenLayer1)};
+Neyron[] hiddenLayer2 = {new Neyron(hiddenLayer1), new Neyron(hiddenLayer1), new Neyron(hiddenLayer1)};
 Neyron[] hiddenLayer3 = {new Neyron(hiddenLayer2), new Neyron(hiddenLayer2)};
 Neyron[] output = {new Neyron(hiddenLayer3)};
 Test[] tests = {
@@ -110,7 +106,7 @@ Test[] tests = {
   new Test(new double[]{1, 1, 1, 1}, new double[]{0}, output)
 };
 
-int count = 100000;
+int count = 500000;
 
 double last = output[0].probe( new double[] {1, 0, 1, 1} );
 
